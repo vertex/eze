@@ -1,0 +1,9 @@
+<p>storefront-creator works!</p>
+<strong>Client ID: <span class="kbd"> {{storefront.clientId}} </span></strong>
+<table class="table">
+    <tr *ngFor="let product of storefront.products">
+        <td><input #productInput type="text" value="{{product.name}}" (blur)="updateProduct(product, productInput.value)"></td>
+    </tr>
+</table>
+<button (click)="addProduct()">Add Product</button>
+<button (click)="getUrl()">getUrl()</button>

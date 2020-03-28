@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StorefrontCreatorComponent } from './Storefront-creator/storefront-creator.component';
+import { RootComponent } from './root/root.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StorefrontCreatorComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,

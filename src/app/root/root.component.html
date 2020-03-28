@@ -1,0 +1,7 @@
+<h2>Here's a storefront</h2>
+<strong>Client ID: <span class="kbd"> {{storefront.clientId}} </span></strong>
+<table class="table">
+    <tr *ngFor="let product of storefront.products">
+        <td>{{product.name}}</td>
+    </tr>
+</table>
