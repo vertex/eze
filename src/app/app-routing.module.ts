@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { StorefrontCreatorComponent } from './Storefront-creator/storefront-creator.component'
+import { StorefrontCreatorComponent } from './storefront-creator/storefront-creator.component'
 import { RootComponent } from './root/root.component'
 
 
