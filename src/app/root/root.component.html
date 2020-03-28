@@ -1,7 +1,29 @@
-<h2>Here's a storefront</h2>
-<strong>Client ID: <span class="kbd"> {{storefront.clientId}} </span></strong>
-<table class="table">
-    <tr *ngFor="let product of storefront.products">
-        <td>{{product.name}}</td>
-    </tr>
-</table>
+
+
+<h2>{{storefront.name}}'s Storefront</h2>
+
+<div class="col-md-12 mb-4">
+    <div class="input-group">
+        <label class="col-form-label col-md-1">Client ID:</label>{{storefront.clientId}}
+    </div>
+</div>
+<div class="col-md-7 mb-3">
+    <div class="row p-1 " *ngFor="let product of storefront.products; index as index">
+        <div class="col">
+            <input
+                #productQuantityInput
+                type="number" [(ngModel)]="product.quantity" class="form-control" />
+
+        </div>
+        <div class="col">
+            <strong> {{product.name}}</strong>
+        </div>
+        <div class="col-md-3">
+            ${{product.price}}
+        </div>
+    </div>
+</div>
+
+
+<div id="paypal-button-container">
+</div>

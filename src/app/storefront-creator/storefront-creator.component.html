@@ -1,9 +1,72 @@
-<p>storefront-creator works!</p>
-<strong>Client ID: <span class="kbd"> {{storefront.clientId}} </span></strong>
-<table class="table">
-    <tr *ngFor="let product of storefront.products">
-        <td><input #productInput type="text" value="{{product.name}}" (blur)="updateProduct(product, productInput.value)"></td>
-    </tr>
-</table>
-<button (click)="addProduct()">Add Product</button>
-<button (click)="getUrl()">getUrl()</button>
+<div class="jumbotron">
+    <h1 class="display-4">Storefront Creator</h1>
+    <p class="lead">
+        Sell your products online with ease, build a menu, send the link to your customers.
+    </p>
+    <hr class="my-4">
+    <p>
+        Accept orders online with ease by creating a menu of options for your customers to choose from.
+        You get a link ti send to your customers, they get a safe secure checkout using one of the most
+        widely accepted payment processors in the world.
+    </p>
+  </div>
+
+  <div class="col-md-12 mb-4">
+    <div class="input-group">
+        <label class="col-form-label col-md-1">Client ID:</label>
+        <input
+            type="text"
+            [(ngModel)]="storefront.clientId"
+            class="form-control col-md-6"
+            placeholder="Client ID"
+            />
+    </div>
+</div>
+<div class="col-md-12 mb-4">
+    <div class="input-group">
+        <label class="col-form-label col-md-1">Store Name</label>
+        <input
+            type="text"
+            [(ngModel)]="storefront.name"
+            class="form-control col-md-6"
+            placeholder="Store Name"
+            />
+    </div>
+</div>
+<div class="col-md-7 mb-3">
+    <div class="row p-1 " *ngFor="let product of storefront.products; index as index">
+        <div class="col">
+            <input type="text"
+                #productNameInput
+                class="form-control"
+                placeholder="Product Name"
+                (blur)="updateProduct(product, productNameInput.value, productPriceInput.value) ">
+        </div>
+        <div class="col-md-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input type="number" #productPriceInput
+                step="1"
+                class="form-control"
+                #productPriceInput
+                aria-label="Amount (to the nearest dollar)"
+                (blur)="updateProduct(product, productNameInput.value, productPriceInput.value) ">
+            <div class="input-group-append">
+                <span class="input-group-text">.00</span>
+            </div>
+        </div>
+        <div class="col-md-2 pt-1">
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeProduct(index)">Remove Item</button>
+        </div>
+    </div>
+</div>
+
+<button type="button" (click)="addProduct()" class="btn btn-primary btn-lg btn-block">
+    Add Product
+</button>
+<a routerLink="/" [(queryParams)]="encodedStorefront" class="btn btn-secondary btn-lg btn-block">
+    Link to your Storefront
+</a>
+
+<!-- <pre>{{encodedStorefront|json}}</pre> -->

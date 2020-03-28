@@ -9,25 +9,33 @@ import LZString from 'lz-string';
 })
 export class StorefrontCreatorComponent implements OnInit {
   storefront: Storefront;
+  encodedStorefront: object;
   constructor() {
-    this.storefront = { clientId: "test", products: [
-      new StorefrontProduct("a")
-    ]}
+    this.storefront = {
+      clientId: "ATQRTT4mO8mygl2xXUyDdP4Bapwk7FTD-6ZUVdgE1uOOhI8dt5keSJV-tA-9sisnqsuYaeU9FyewrwNu",
+      name: "",
+      products: [
+        new StorefrontProduct("a", 0)
+      ]}
+    this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
-  updateProduct(product: StorefrontProduct, name: string) {
-    console.log("updateProduct", product, name)
+  updateProduct(product: StorefrontProduct, name: string, price: number) {
     product.name = name;
-    console.log(this.storefront)
+    product.price = price;
+    this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
   addProduct() {
-    this.storefront.products.push(new StorefrontProduct(""))
+    this.storefront.products.push(new StorefrontProduct("", 0))
+    this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
-  getUrl() {
-    console.log("http://localhost:4200/?s=" + encodeURIComponent(LZString.compressToBase64(JSON.stringify(this.storefront))))
+  removeProduct(index: number) {
+    this.storefront.products.splice(index, 1)
+    this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
-
+  getQueryParamsForStore(storefront: Storefront) {
+    return { s: LZString.compressToEncodedURIComponent(JSON.stringify(storefront)) };
+  }
   ngOnInit(): void {
     console.log("StorefrontCreatorComponent", this.storefront)
   }
-
 }

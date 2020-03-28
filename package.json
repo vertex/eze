@@ -22,6 +22,7 @@
     "bootstrap": "^4.4.1",
     "lz-string": "^1.4.4",
     "rxjs": "~6.5.4",
+    "systemjs": "^6.2.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
