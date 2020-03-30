@@ -9,7 +9,7 @@
 </div>
 <div class="col-md-7 mb-3">
     <div class="row p-1 " *ngFor="let product of storefront.products; index as index">
-        <div class="col">
+        <div class="col-md-3">
             <input
                 #productQuantityInput
                 type="number" [(ngModel)]="product.quantity" class="form-control" />
@@ -18,7 +18,7 @@
         <div class="col">
             <strong> {{product.name}}</strong>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             ${{product.price}}
         </div>
     </div>

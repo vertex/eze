@@ -23,27 +23,41 @@ export class RootComponent implements OnInit {
       this.storefront = JSON.parse(LZString.decompressFromEncodedURIComponent(encoded));
       this.storefront.products.map((p: StorefrontProduct) => p.quantity = 0)
 
-      var PAYPAL_SCRIPT = 'https://www.paypal.com/sdk/js?client-id=' +  this.storefront.clientId;
+      var PAYPAL_SCRIPT = 'https://www.paypal.com/sdk/js?debug=true&client-id=' +  this.storefront.clientId;
       var script = document.createElement('script');
       var theStorefrontThis = this;
       script.onload = loaded => {
         paypal.Buttons({
           createOrder: function(data, actions) {
             console.log("Storefront: ", theStorefrontThis.storefront)
-            let units = [];
+            let items = [];
+            let total = 0;
             theStorefrontThis.storefront.products.forEach(product => {
-              units.push({
-                    quantity: 1,
-                    value: product.price + ".00",
-                    name: product.name ,
-                    unit_amount: product.price * product.quantity,
-                    category: "PHYSICAL_GOODS"
-              })
-
+              if (product.quantity && product.quantity > 0) {
+                // Intent to buy the product
+                total += (product.price * product.quantity)
+                items.push({
+                  quantity: product.quantity || 1,
+                  // value: product.price + '.00',
+                  name: product.name ,
+                  unit_amount: {value: product.price + '.00', currency_code: 'USD'}
+                })
+              }
             })
             return actions.order.create({
-              currency_code: "USD",
-              purchase_units: units
+              purchase_units: [{
+                amount: {
+                  value: total.toString(),
+                  currency_code: 'USD',
+                  breakdown: {
+                    item_total: { currency_code: 'USD', value: total.toString() } //+ '.00'
+                  }
+                },
+                items: items,
+                shipping: {
+                  type: 'PICKUP'
+                }
+              }]
             })
           }
         }).render('#paypal-button-container');

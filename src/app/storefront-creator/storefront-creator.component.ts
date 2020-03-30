@@ -12,8 +12,17 @@ export class StorefrontCreatorComponent implements OnInit {
   encodedStorefront: object;
   constructor() {
     this.storefront = {
-      clientId: "ATQRTT4mO8mygl2xXUyDdP4Bapwk7FTD-6ZUVdgE1uOOhI8dt5keSJV-tA-9sisnqsuYaeU9FyewrwNu",
+      // clientId: "ATQRTT4mO8mygl2xXUyDdP4Bapwk7FTD-6ZUVdgE1uOOhI8dt5keSJV-tA-9sisnqsuYaeU9FyewrwNu",
+      clientId: "AXYY4KXrkkXVULGPgTzFGjhtmdgi2zBXDxT6pZjbPovcrSXquirarADQ6lUvmb1uMlcq92L7Xda3QgV8",
       name: "",
+      address: {
+        address_line_1: '',
+        address_line_2: '',
+        admin_area_2: '',
+        admin_area_1: '',
+        postal_code: '',
+        country_code: ''
+      },
       products: [
         new StorefrontProduct("a", 0)
       ]}
