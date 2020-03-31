@@ -51,12 +51,18 @@ export class RootComponent implements OnInit {
                   currency_code: 'USD',
                   breakdown: {
                     item_total: { currency_code: 'USD', value: total.toString() } //+ '.00'
+                  },
+                  shipping: {
+                    type: 'PICKUP'
+                  },
+                  shipping_detail: {
+                    name: {
+                      full_name: "S2S " + theStorefrontThis.storefront.name
+                    },
+                    address_portable: theStorefrontThis.storefront.address
                   }
                 },
                 items: items,
-                shipping: {
-                  type: 'PICKUP'
-                }
               }]
             })
           }

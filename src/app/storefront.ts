@@ -10,7 +10,9 @@ export class Address {
 }
 export class Storefront {
     clientId: string;
+    readOnly: boolean;
     name: string;
     products: Array<StorefrontProduct>;
-    address: Address
+    address: Address;
+    expires: string;
 }

@@ -7,6 +7,12 @@ import { AppComponent } from './app.component';
 import { StorefrontCreatorComponent } from './storefront-creator/storefront-creator.component';
 import { RootComponent } from './root/root.component'
 
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.arrows
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +22,8 @@ import { RootComponent } from './root/root.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgWizardModule.forRoot(ngWizardConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
