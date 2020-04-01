@@ -1,19 +1,4 @@
-<div class="jumbotron">
-    <h1 class="display-4">Storefront Creator</h1>
-    <p class="lead">
-        We're here to make collecting customer's pickup orders easier, while reducing your physical customer contact in a low-cost, high-tech manner.
-    </p>
-    <p>
-        We're trying to enable small businesses to make their products available online with little upfront
-        cost or technical ability. We understand that the resposne to COVID-19 has made it dificult for small
-        businesses to keep their doors open, and we want to keep it easy for them to do so.
-        <strong>Pickup orders</strong> are the new norm, and so is minimizing customer contact. We're here to help.
-    </p>
-    <p>
-        Our mission starts with making this product <i>easy to understand</i> and <i>useful</i>. If we can do anything to
-        make this product better, please email <a href="mailto:eze@brk.dev">eze@brk.dev</a>.
-    </p>
-</div>
+
 
 <!---
 steps:
@@ -36,6 +21,7 @@ steps:
                         This is the first and most complicated step, if you can make it through this, we'll be on our way to collecting your customer's orders in
                         no time.
                     </p>
+                    <hr class="my-4">
                     <ol>
                         <li>Go to <a href="https://Developer.PayPal.com" target="_blank">Developer.PayPal.com</a> and select <strong>Log into Dashboard</strong> in the right hand corner
                         (you may have to click on the menu dropdown in the upper left-hand corner to see the <strong>Log into Dashboard</strong> link).</li>
@@ -226,11 +212,20 @@ steps:
                         />
                 </div>
 
-                <a routerLink="/" [(queryParams)]="encodedStorefront" class="btn btn-secondary btn-lg btn-block mb-4">
+                <a routerLink="/storefront" [(queryParams)]="encodedStorefront" class="btn btn-secondary btn-lg btn-block mb-4">
                     Link to your Storefront
                 </a>
             </ng-wizard-step>
         </ng-wizard>
     </div>
+    <div class="col-md-6">
+        <h3>Preview</h3>
+        <div class="card">
+            <div class="card-body">
+                <app-storefront-display [(storefront)]="storefront"></app-storefront-display>
+            </div>
+        </div>
+    </div>
+
 </div>
 <!-- <pre>{{encodedStorefront|json}}</pre> -->

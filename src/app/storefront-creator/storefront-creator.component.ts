@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Storefront } from '../storefront';
+import { StorefrontUnfinished } from '../storefront-unfinished';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StorefrontProduct } from '../storefront-product';
 import LZString from 'lz-string';
 
@@ -13,16 +14,14 @@ import { NgWizardConfig, THEME, StepChangedArgs, NgWizardService } from 'ng-wiza
   styleUrls: ['./storefront-creator.component.scss']
 })
 export class StorefrontCreatorComponent implements OnInit {
-
-
-  storefront: Storefront;
+  storefront: StorefrontUnfinished;
   encodedStorefront: object;
-  constructor() {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.storefront = {
       // clientId: "ATQRTT4mO8mygl2xXUyDdP4Bapwk7FTD-6ZUVdgE1uOOhI8dt5keSJV-tA-9sisnqsuYaeU9FyewrwNu",
       clientId: "AXYY4KXrkkXVULGPgTzFGjhtmdgi2zBXDxT6pZjbPovcrSXquirarADQ6lUvmb1uMlcq92L7Xda3QgV8",
       readOnly: false,
-      name: "",
+      products: [],
       address: {
         address_line_1: '',
         address_line_2: '',
@@ -30,11 +29,8 @@ export class StorefrontCreatorComponent implements OnInit {
         admin_area_1: '',
         postal_code: '',
         country_code: ''
-      },
-      expires: "",
-      products: [
-        new StorefrontProduct("", 0)
-      ]}
+      }
+    }
     this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
   stepChanged(args: StepChangedArgs) {
@@ -53,8 +49,16 @@ export class StorefrontCreatorComponent implements OnInit {
     this.storefront.products.splice(index, 1)
     this.encodedStorefront = this.getQueryParamsForStore(this.storefront);
   }
-  getQueryParamsForStore(storefront: Storefront) {
-    return { s: LZString.compressToEncodedURIComponent(JSON.stringify(storefront)) };
+  getQueryParamsForStore(storefront: StorefrontUnfinished) {
+    let newParams = { s: LZString.compressToEncodedURIComponent(JSON.stringify(storefront)) };
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: newParams,
+        queryParamsHandling: 'merge'
+      });
+    return newParams;
   }
   ngOnInit(): void {
     console.log("StorefrontCreatorComponent", this.storefront)

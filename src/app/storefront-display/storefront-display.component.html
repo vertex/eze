@@ -1,0 +1,24 @@
+<h2 *ngIf="storefront.name">{{storefront.name}}'s Storefront</h2>
+
+<div class="col-md-12 mb-4" *ngIf="storefront.clientId">
+    <div class="input-group">
+        <label class="col-form-label col-md-1">Client ID:</label>{{storefront.clientId}}
+    </div>
+</div>
+<div class="col-md-7 mb-3">
+    <div class="row p-1 " *ngFor="let product of storefront.products; index as index">
+        <div class="col-md-3">
+            <input
+                #productQuantityInput
+                type="number" [(ngModel)]="product.quantity" class="form-control" />
+
+        </div>
+        <div class="col">
+            <strong> {{product.name}}</strong>
+        </div>
+        <div class="col-md-4">
+            ${{product.price}}
+        </div>
+    </div>
+</div>
+

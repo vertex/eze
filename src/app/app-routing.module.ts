@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StorefrontCreatorComponent } from './storefront-creator/storefront-creator.component'
-import { RootComponent } from './root/root.component'
+import { StorefrontComponent } from './storefront/storefront.component'
+import { HomepageComponent } from './homepage/homepage.component'
 
 
 const routes: Routes = [
-  { path: '', component: RootComponent},
+  { path: '', component: HomepageComponent },
+  { path: 'storefront', component: StorefrontComponent },
   { path: 'create-storefront', component: StorefrontCreatorComponent }
 ];
 
